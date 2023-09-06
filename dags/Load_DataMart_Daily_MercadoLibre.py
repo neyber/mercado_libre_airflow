@@ -36,7 +36,6 @@ task_1 = PostgresOperator(
 task_2 = PythonOperator(
     task_id = 'fetch_categories_data',
     python_callable = fetch_categories_data,
-    provide_context = True,
     dag = dag
 )
 
