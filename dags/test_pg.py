@@ -13,7 +13,7 @@ dag = DAG(
     dag_id = 'test_pg',
     default_args = default_args,
     start_date = datetime(2023, 9, 3),
-    schedule_interval='0 0 * * *'
+    schedule_interval = '0 0 * * *'
 )
 
 # Define the task using PostgresOperator
@@ -26,5 +26,5 @@ task_1 = PostgresOperator(
                 name VARCHAR(100)
             )
         """,
-    dag=dag
+    dag = dag
 )
