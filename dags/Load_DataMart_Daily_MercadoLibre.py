@@ -49,4 +49,22 @@ task_4 = PythonOperator(
     dag = dag
 )
 
-task_1 >> task_2 >> task_3 >> task_4
+task_5 = PostgresOperator(
+    task_id = 'categories_hashing',
+    postgres_conn_id = 'pg_localhost',
+    sql = """
+        SELECT dmstage.udf_categories_hash()
+    """,
+    dag = dag
+)
+
+task_6 = PostgresOperator(
+    task_id = 'load_categories',
+    postgres_conn_id = 'pg_localhost',
+    sql = """
+        SELECT datamart.udf_load_categories()
+    """,
+    dag = dag
+)
+
+task_1 >> task_2 >> task_3 >> task_4 >> task_5 >> task_6
